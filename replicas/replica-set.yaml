@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicaset-webservice
+  labels:
+    service: api
+    tier: backend
+spec:
+  template:
+    metadata:
+      name: webservice
+      labels:
+        service: api
+        tier: backend
+    spec:
+      containers:
+        - name: nginx-webservice
+          image: nginx:1.7.1
+  replicas: 3
+  selector:
+    matchLabels:
+      service: api
+      tier: backend

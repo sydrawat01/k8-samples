@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-webservice
+  labels:
+    tier: backend
+    service: api
+spec:
+  template:
+    metadata:
+      name: webservice
+      labels:
+        tier: backend
+        service: api
+    spec:
+      containers:
+        - name: nginx-webservice
+          image: nginx:1.7.1 #change to latest to try out rollout versioning
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: backend
+      service: api
