@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webservice
+  labels:
+    tier: backend
+    service: api
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 80 # port on the Pod, if not provided, it is assumed to be the same as port
+      port: 80 # port on the Service
+      nodePort: 30008 # port of the Node: Valid range = [30000-32767]
+  selector:
+    # labels from Pod definition, this links the service to the pod
+    service: api
+    tier: backend
